@@ -1,0 +1,90 @@
+[
+  {
+    "UserId": "0001-0001",
+    "StoreId": "store01",
+    "Reason": "Welcome bonus",
+    "Amount": 50,
+    "IsDeposit": true,
+    "CreatedDate": "2021-12-28 12:12:18"
+  },
+  {
+    "UserId": "0001-0001",
+    "StoreId": "store01",
+    "Reason": "New Year present",
+    "Amount": 50,
+    "IsDeposit": true,
+    "CreatedDate": "2022-01-01 08:00:00"
+  },
+  {
+    "UserId": "0001-0001",
+    "StoreId": null,
+    "Reason": "Boss bonus",
+    "Amount": 10000,
+    "IsDeposit": true,
+    "CreatedDate": "2022-02-01 10:00:07"
+  },
+  {
+    "UserId": "0001-0001",
+    "StoreId": null,
+    "Reason": "Shop purchase",
+    "Amount": 9000,
+    "IsDeposit": false,
+    "CreatedDate": "2022-02-04 13:58:24"
+  },
+  {
+    "UserId": "0001-0002",
+    "StoreId": "store02",
+    "Reason": "Welcome bonus",
+    "Amount": 50,
+    "IsDeposit": true,
+    "CreatedDate": "2021-10-03 09:06:57"
+  },
+  {
+    "UserId": "0001-0002",
+    "StoreId": "store02",
+    "Reason": "Christmas bonus",
+    "Amount": 50,
+    "IsDeposit": true,
+    "CreatedDate": "2021-12-25 08:00:00"
+  },
+  {
+    "UserId": "0001-0002",
+    "StoreId": "store02",
+    "Reason": "New Year bonus",
+    "Amount": 50,
+    "IsDeposit": true,
+    "CreatedDate": "2022-01-01 08:00:00"
+  },
+  {
+    "UserId": "0001-0002",
+    "StoreId": "store02",
+    "Reason": "Some contribution",
+    "Amount": 150,
+    "IsDeposit": true,
+    "CreatedDate": "2022-01-19 18:40:12"
+  },
+  {
+    "UserId": "0001-0002",
+    "StoreId": "store02",
+    "Reason": "Purchase",
+    "Amount": 100,
+    "IsDeposit": false,
+    "CreatedDate": "2022-03-05 15:18:47"
+  },
+  {
+    "UserId": "0001-0002",
+    "StoreId": null,
+    "Reason": "Boss bonus",
+    "Amount": 10000,
+    "IsDeposit": true,
+    "CreatedDate": "2022-02-01 10:04:59"
+  },
+  {
+    "UserId": "0001-0002",
+    "StoreId": null,
+    "Reason": "Store purchase",
+    "Amount": 8000,
+    "IsDeposit": false,
+    "CreatedDate": "2022-02-02 17:01:39"
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "VirtoCommerce.Loyalty.Web": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:4903;http://localhost:4904"
+    }
+  }
+}

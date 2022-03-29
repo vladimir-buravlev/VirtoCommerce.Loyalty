@@ -1,0 +1,22 @@
+[
+  {
+    "UserId": "0001-0001",
+    "StoreId": "store01",
+    "Balance": 100
+  },
+  {
+    "UserId": "0001-0001",
+    "StoreId": null,
+    "Balance": 1000
+  },
+  {
+    "UserId": "0001-0002",
+    "StoreId": "store02",
+    "Balance": 200
+  },
+  {
+    "UserId": "0001-0002",
+    "StoreId": null,
+    "Balance": 2000
+  }
+]
