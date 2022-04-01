@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\VirtoCommerce.Loyalty.Core\VirtoCommerce.Loyalty.Core.csproj" />
+    <ProjectReference Include="..\VirtoCommerce.Loyalty.Xapi\VirtoCommerce.Loyalty.Xapi.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.3">
       <PrivateAssets>all</PrivateAssets>

@@ -14,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.Loyalty.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.Loyalty.Core", "src\VirtoCommerce.Loyalty.Core\VirtoCommerce.Loyalty.Core.csproj", "{7E3D2070-A2A3-4271-B501-D830136A7BA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtoCommerce.Loyalty.Xapi", "src\VirtoCommerce.Loyalty.Xapi\VirtoCommerce.Loyalty.Xapi.csproj", "{3EC5A9D6-9FD0-402A-99F6-DB80F68B9C5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtoCommerce.Loyalty.Xapi", "src\VirtoCommerce.Loyalty.Xapi\VirtoCommerce.Loyalty.Xapi.csproj", "{3EC5A9D6-9FD0-402A-99F6-DB80F68B9C5D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,7 +54,7 @@ Global
 		{3EC5A9D6-9FD0-402A-99F6-DB80F68B9C5D} = {CFC1B42A-2604-4030-BD28-7706B47C6365}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		0053DA55-9E06-4601-A4F1-5773F96D6154 = {0053DA55-9E06-4601-A4F1-5773F96D6154}
 		SolutionGuid = {B3C98436-4331-4B6C-B4C3-FDF95FAEAB00}
+		0053DA55-9E06-4601-A4F1-5773F96D6154 = {0053DA55-9E06-4601-A4F1-5773F96D6154}
 	EndGlobalSection
 EndGlobal

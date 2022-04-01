@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using VirtoCommerce.Loyalty.Core.Models;
 using VirtoCommerce.Loyalty.Core.Models.Search;
-using VirtoCommerce.Loyalty.Core.Services;
 using VirtoCommerce.Loyalty.Data.Models;
 using VirtoCommerce.Loyalty.Data.Repositories;
 using VirtoCommerce.Platform.Core.Caching;
@@ -14,16 +12,11 @@ using VirtoCommerce.Platform.Data.GenericCrud;
 
 namespace VirtoCommerce.Loyalty.Data.Services
 {
-    public class LoyaltySearchService : SearchService<LoyaltySearchCriteria, LoyaltySearchResult, PointsOperation, PointsOperationEntity>, ILoyaltySearchService
+    public class LoyaltySearchService : SearchService<LoyaltySearchCriteria, LoyaltySearchResult, PointsOperation, PointsOperationEntity>
     {
-        public LoyaltySearchService(Func<ILoyaltyRepository> repositoryFactory, IPlatformMemoryCache platformMemoryCache, ICrudService<PointsOperation> loyaltySearchService)
-            : base(repositoryFactory, platformMemoryCache, loyaltySearchService)
+        public LoyaltySearchService(Func<ILoyaltyRepository> repositoryFactory, IPlatformMemoryCache platformMemoryCache, ICrudService<PointsOperation> loyaltyService)
+            : base(repositoryFactory, platformMemoryCache, loyaltyService)
         {
-        }
-
-        public Task<LoyaltySearchResult> SearchOperationsAsync(LoyaltySearchCriteria criteria)
-        {
-            return SearchAsync(criteria);
         }
 
         protected override IQueryable<PointsOperationEntity> BuildQuery(IRepository repository, LoyaltySearchCriteria criteria)

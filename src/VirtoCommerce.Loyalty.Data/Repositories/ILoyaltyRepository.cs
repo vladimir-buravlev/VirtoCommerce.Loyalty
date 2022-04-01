@@ -10,8 +10,5 @@ namespace VirtoCommerce.Loyalty.Data.Repositories
         IQueryable<PointsOperationEntity> PointsOperations { get; }
         Task<UserBalanceEntity> GetUserBalance(string userId, string storeId);
         Task<PointsOperationEntity[]> GetUserOperations(string userId, string storeId);
-        Task<bool> SaveUserBalance(UserBalanceEntity userBalance, bool isNew);
-        Task<bool> SavePointOperation(PointsOperationEntity pointOperation);
-        Task<PointsOperationEntity[]> GetPointsOperationsByIds(string[] ids);
     }
 }

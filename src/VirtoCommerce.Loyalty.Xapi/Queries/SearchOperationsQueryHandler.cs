@@ -1,7 +1,8 @@
 using AutoMapper;
 using VirtoCommerce.ExperienceApiModule.Core.Infrastructure;
+using VirtoCommerce.Loyalty.Core.Models;
 using VirtoCommerce.Loyalty.Core.Models.Search;
-using VirtoCommerce.Loyalty.Core.Services;
+using VirtoCommerce.Platform.Core.GenericCrud;
 using VirtoCommerce.SearchModule.Core.Services;
 
 namespace VirtoCommerce.Loyalty.Xapi.Queries
@@ -10,10 +11,13 @@ namespace VirtoCommerce.Loyalty.Xapi.Queries
     {
         private readonly IMapper _mapper;
         private readonly ISearchPhraseParser _searchPhraseParser;
-        private readonly ILoyaltySearchService _loyaltySearchService;
+        private readonly ISearchService<LoyaltySearchCriteria, LoyaltySearchResult, PointsOperation> _loyaltySearchService;
 
 
-        public SearchOperationsQueryHandler(IMapper mapper, ISearchPhraseParser searchPhraseParser, ILoyaltySearchService loyaltySearchService)
+        public SearchOperationsQueryHandler(
+            IMapper mapper,
+            ISearchPhraseParser searchPhraseParser,
+            ISearchService<LoyaltySearchCriteria, LoyaltySearchResult, PointsOperation> loyaltySearchService)
         {
             _mapper = mapper;
             _searchPhraseParser = searchPhraseParser;
@@ -29,7 +33,7 @@ namespace VirtoCommerce.Loyalty.Xapi.Queries
                                         .WithPaging(request.Skip, request.Take)
                                         .WithSorting(request.Sort)
                                         .Build();
-            var searchResult = _loyaltySearchService.SearchOperationsAsync(searchCriteria);
+            var searchResult = _loyaltySearchService.SearchAsync(searchCriteria);
             return searchResult;
         }
     }

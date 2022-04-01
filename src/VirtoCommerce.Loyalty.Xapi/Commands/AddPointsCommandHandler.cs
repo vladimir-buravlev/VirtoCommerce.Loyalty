@@ -31,7 +31,7 @@ namespace VirtoCommerce.Loyalty.Xapi.Commands
             pointsOperation.StoreId = request.StoreId;
             pointsOperation.Reason = request.Reason;
             pointsOperation.Amount = Math.Abs(request.Amount);
-            pointsOperation.IsDeposit = request.Amount >= 0;//request.IsDeposit;
+            pointsOperation.IsDeposit = request.Amount >= 0;
 
             decimal result = await _loyaltyService.AddPointOperationAsync(pointsOperation);
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using VirtoCommerce.Loyalty.Core.Events;
 using VirtoCommerce.Loyalty.Core.Models;
 using VirtoCommerce.Loyalty.Core.Services;
@@ -50,13 +51,6 @@ namespace VirtoCommerce.Loyalty.Data.Services
             return userBalance;
         }
 
-        public virtual async Task<IList<PointsOperation>> GetUserOperationsAsync(string userId, string storeId)
-        {
-            using var repository = _repositoryFactory();
-            return (await repository.GetUserOperations(userId, storeId))
-                .Select(x => x.ToModel(AbstractTypeFactory<PointsOperation>.TryCreateInstance())).ToList();
-        }
-
         public virtual async Task<decimal> AddPointOperationAsync(PointsOperation pointOperation)
         {
             //we need some logic here - who can add point, how need check this?
@@ -86,18 +80,25 @@ namespace VirtoCommerce.Loyalty.Data.Services
             userBalanceEntity.Balance = balance;
             pointOperation.BalanceAfterOperation = balance;
 
-            bool isUpdated = await repository.SavePointOperation(AbstractTypeFactory<PointsOperationEntity>.TryCreateInstance().FromModel(pointOperation, pkMap));
-            if (isUpdated)
+            await base.SaveChangesAsync(new List<PointsOperation> { pointOperation });
+
+            if (isNew)
             {
-                await repository.SaveUserBalance(userBalanceEntity, isNew);
+                repository.Add(userBalanceEntity);
             }
+            else
+            {
+                repository.Update(userBalanceEntity);
+            }
+
+            await repository.UnitOfWork.CommitAsync();
 
             return balance;
         }
 
         protected override async Task<IEnumerable<PointsOperationEntity>> LoadEntities(IRepository repository, IEnumerable<string> ids, string responseGroup)
         {
-            return await ((ILoyaltyRepository)repository).GetPointsOperationsByIds(ids.ToArray());
+            return await ((ILoyaltyRepository)repository).PointsOperations.Where(x => ids.Contains(x.Id)).ToArrayAsync();
         }
     }
 }

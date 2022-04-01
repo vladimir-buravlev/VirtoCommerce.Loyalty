@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Moq;
@@ -37,21 +36,6 @@ namespace VirtoCommerce.Loyalty.Tests
             Assert.Equal(factBalance, calculatedBalance);
         }
 
-        [Theory]
-        [InlineData("0001-0001", "store01", 100)]
-        [InlineData("0001-0001", null, 1000)]
-        [InlineData("0001-0002", "store02", 200)]
-        [InlineData("0001-0002", null, 2000)]
-        [InlineData("unknown_user", "unknown_store", 0)]
-        public async Task GetUserOperations_SomeIds_ReturnsItem(string userId, string storeId, decimal expectedBalance)
-        {
-            MockRepository(userId, storeId);
-
-            List<PointsOperation> pointOperations = (await LoyaltyService.GetUserOperationsAsync(userId, storeId)).ToList();
-            decimal factBalance = pointOperations.Sum(x => x.Amount * (x.IsDeposit ? 1 : -1));
-
-            Assert.Equal(expectedBalance, factBalance);
-        }
 
         private void MockRepository(string userId, string storeId)
         {

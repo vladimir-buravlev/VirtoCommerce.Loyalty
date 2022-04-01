@@ -11,34 +11,36 @@ namespace VirtoCommerce.Loyalty.Data.Models
 
         public override CustomerOrder ToModel(CustomerOrder customerOrder)
         {
+            base.ToModel(customerOrder);
+
             if (customerOrder is LoyaltedOrder loyaltedOrder)
             {
                 loyaltedOrder.LoyaltyCalculated = LoyaltyCalculated;
             }
-
-            base.ToModel(customerOrder);
 
             return customerOrder;
         }
 
         public override CustomerOrderEntity FromModel(CustomerOrder customerOrder, PrimaryKeyResolvingMap pkMap)
         {
+            base.FromModel(customerOrder, pkMap);
+
             if (customerOrder is LoyaltedOrder loyaltedOrder)
             {
                 LoyaltyCalculated = loyaltedOrder.LoyaltyCalculated;
             }
 
-            return base.FromModel(customerOrder, pkMap);
+            return this;
         }
 
         public override void Patch(CustomerOrderEntity target)
         {
+            base.Patch(target);
+
             if (target is LoyaltedOrderEntity loyaltedOrderEtnity)
             {
                 loyaltedOrderEtnity.LoyaltyCalculated = LoyaltyCalculated;
             }
-
-            base.Patch(target);
         }
     }
 }

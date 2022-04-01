@@ -48,12 +48,8 @@ namespace VirtoCommerce.Loyalty.Web
             serviceCollection.AddTransient<Func<ILoyaltyRepository>>(provider => () => provider.CreateScope().ServiceProvider.GetRequiredService<ILoyaltyRepository>());
 
             serviceCollection.AddTransient<ILoyaltyService, LoyaltyService>();
-            serviceCollection.AddTransient<ILoyaltySearchService, LoyaltySearchService>();
-            //serviceCollection.AddTransient<CustomerOrderService, LoyaltedOrderService>();
-            //serviceCollection.AddTransient<ILoyaltedOrderService, LoyaltedOrderService>();
 
             serviceCollection.AddTransient<ISearchService<LoyaltySearchCriteria, LoyaltySearchResult, PointsOperation>, LoyaltySearchService>();
-            serviceCollection.AddTransient(x => (ILoyaltySearchService)x.GetRequiredService<ISearchService<LoyaltySearchCriteria, LoyaltySearchResult, PointsOperation>>());
             serviceCollection.AddTransient(x => (ICrudService<PointsOperation>)x.GetService<ILoyaltyService>());
 
             serviceCollection.AddTransient<OrderStatusChangedEventHandler>();
