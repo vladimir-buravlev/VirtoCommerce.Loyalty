@@ -10,6 +10,7 @@ namespace VirtoCommerce.Loyalty.Xapi.Schemas
         public LoyaltedOrderType(IDynamicPropertyResolverService dynamicPropertyResolverService)
             : base(dynamicPropertyResolverService)
         {
+            Name = nameof(CustomerOrderType);
             Field<BooleanGraphType>("loyaltyCalculated", resolve: context => (context.Source.Order as LoyaltedOrder).LoyaltyCalculated);
         }
     }
