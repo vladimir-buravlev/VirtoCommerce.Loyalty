@@ -1,5 +1,7 @@
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using VirtoCommerce.Loyalty.Core.Models;
 using VirtoCommerce.Platform.Core.Common;
 
@@ -16,6 +18,7 @@ namespace VirtoCommerce.Loyalty.Data.Models
 
         public decimal Balance { get; set; }
 
+        public virtual ObservableCollection<PointsOperationEntity> Operations { get; set; } = new NullCollection<PointsOperationEntity>();
 
         public virtual UserBalance ToModel(UserBalance userBalance)
         {
@@ -33,6 +36,8 @@ namespace VirtoCommerce.Loyalty.Data.Models
             userBalance.UserId = UserId;
             userBalance.StoreId = StoreId;
             userBalance.Balance = Balance;
+
+            userBalance.Operations = Operations.Select(x => x.ToModel(AbstractTypeFactory<PointsOperation>.TryCreateInstance())).OfType<PointsOperation>().ToList();
 
             return userBalance;
         }
@@ -53,6 +58,11 @@ namespace VirtoCommerce.Loyalty.Data.Models
             UserId = userBalance.UserId;
             StoreId = userBalance.StoreId;
             Balance = userBalance.Balance;
+
+            if (userBalance.Operations != null)
+            {
+                Operations = new ObservableCollection<PointsOperationEntity>(userBalance.Operations.Select(x => AbstractTypeFactory<PointsOperationEntity>.TryCreateInstance().FromModel(x, pkMap)).OfType<PointsOperationEntity>());
+            }
 
             return this;
         }

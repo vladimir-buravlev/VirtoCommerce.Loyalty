@@ -1,11 +1,11 @@
+using System.Linq;
 using System.Threading.Tasks;
 using VirtoCommerce.Loyalty.Core.Models;
 using VirtoCommerce.Loyalty.Core.Services;
-using VirtoCommerce.OrdersModule.Core.Model;
 using VirtoCommerce.OrdersModule.Core.Services;
 using VirtoCommerce.Platform.Core.Common;
 
-namespace VirtoCommerce.Loyalty.Data.Jobs
+namespace VirtoCommerce.Loyalty.Data.BackgroundJobs
 {
     public class LoyaltyJob
     {
@@ -20,8 +20,8 @@ namespace VirtoCommerce.Loyalty.Data.Jobs
 
         public async Task AccrueLoyaltyPoints(string[] orderIds)
         {
-            var orders = await _orderService.GetByIdsAsync(orderIds);
-            foreach (CustomerOrder order in orders)
+            var orders = (await _orderService.GetByIdsAsync(orderIds)).OfType<LoyaltedOrder>().ToArray();
+            foreach (LoyaltedOrder order in orders)
             {
                 PointsOperation orderBonus = AbstractTypeFactory<PointsOperation>.TryCreateInstance();
                 orderBonus.UserId = order.CustomerId;
@@ -32,8 +32,7 @@ namespace VirtoCommerce.Loyalty.Data.Jobs
 
                 await _loyaltyService.AddPointOperationAsync(orderBonus);
 
-                LoyaltedOrder loyaltedOrder = order as LoyaltedOrder;
-                loyaltedOrder.LoyaltyCalculated = true;
+                order.LoyaltyCalculated = true;
             }
             await _orderService.SaveChangesAsync(orders);
         }

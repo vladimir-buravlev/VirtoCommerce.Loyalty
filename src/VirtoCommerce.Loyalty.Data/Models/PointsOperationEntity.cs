@@ -11,7 +11,6 @@ namespace VirtoCommerce.Loyalty.Data.Models
         [Required]
         [StringLength(128)]
         public string UserId { get; set; }
-        //public virtual ApplicationUser User { get; set; }
 
         [StringLength(128)]
         public string StoreId { get; set; }
@@ -24,6 +23,9 @@ namespace VirtoCommerce.Loyalty.Data.Models
         public bool IsDeposit { get; set; }
 
         public decimal BalanceAfterOperation { get; set; }
+
+        public string UserBalanceId { get; set; }
+        public virtual UserBalanceEntity UserBalance { get; set; }
 
         public virtual PointsOperation ToModel(PointsOperation pointsOperation)
         {
@@ -44,6 +46,7 @@ namespace VirtoCommerce.Loyalty.Data.Models
             pointsOperation.Amount = Amount;
             pointsOperation.IsDeposit = IsDeposit;
             pointsOperation.BalanceAfterOperation = BalanceAfterOperation;
+            pointsOperation.UserBalanceId = UserBalanceId;
 
             return pointsOperation;
         }
@@ -67,6 +70,7 @@ namespace VirtoCommerce.Loyalty.Data.Models
             Amount = pointsOperation.Amount;
             IsDeposit = pointsOperation.IsDeposit;
             BalanceAfterOperation = pointsOperation.BalanceAfterOperation;
+            UserBalanceId = pointsOperation.UserBalanceId;
 
             return this;
         }

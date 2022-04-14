@@ -8,7 +8,6 @@ namespace VirtoCommerce.Loyalty.Data.Repositories
     public interface ILoyaltyRepository : IRepository
     {
         IQueryable<PointsOperationEntity> PointsOperations { get; }
-        Task<UserBalanceEntity> GetUserBalance(string userId, string storeId);
-        Task<PointsOperationEntity[]> GetUserOperations(string userId, string storeId);
+        Task<UserBalanceEntity> GetUserBalance(string userId, string storeId, bool showOperations);
     }
 }

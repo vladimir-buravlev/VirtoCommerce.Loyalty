@@ -11,6 +11,7 @@ namespace VirtoCommerce.Loyalty.Core.Models
         public decimal Amount { get; set; }
         public bool IsDeposit { get; set; }
         public decimal BalanceAfterOperation { get; set; }
+        public string UserBalanceId { get; set; }
 
         public object Clone()
         {

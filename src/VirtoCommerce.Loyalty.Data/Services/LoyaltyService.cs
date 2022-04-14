@@ -34,20 +34,9 @@ namespace VirtoCommerce.Loyalty.Data.Services
 
             using var repository = _repositoryFactory();
 
-            UserBalanceEntity userBalanceEntity = await repository.GetUserBalance(userId, storeId);
+            UserBalanceEntity userBalanceEntity = await repository.GetUserBalance(userId, storeId, showOperations);
             UserBalance userBalance = userBalanceEntity?.ToModel(AbstractTypeFactory<UserBalance>.TryCreateInstance());
-            if (userBalance == null)
-            {
-                userBalance = AbstractTypeFactory<UserBalance>.TryCreateInstance();
-                userBalance.UserId = userId;
-                userBalance.StoreId = storeId;
-                userBalance.Balance = 0;
-            }
-            if (showOperations)
-            {
-                userBalance.Operations = (await repository.GetUserOperations(userId, storeId))
-                    .Select(x => x.ToModel(AbstractTypeFactory<PointsOperation>.TryCreateInstance())).Take(20).ToList();
-            }
+
             return userBalance;
         }
 
@@ -57,7 +46,7 @@ namespace VirtoCommerce.Loyalty.Data.Services
             using var repository = _repositoryFactory();
             PrimaryKeyResolvingMap pkMap = new PrimaryKeyResolvingMap();
 
-            UserBalanceEntity userBalanceEntity = await repository.GetUserBalance(pointOperation.UserId, pointOperation.StoreId);
+            UserBalanceEntity userBalanceEntity = await repository.GetUserBalance(pointOperation.UserId, pointOperation.StoreId, false);
             bool isNew = false;
             decimal balance = userBalanceEntity?.Balance ?? 0;
 
@@ -80,7 +69,6 @@ namespace VirtoCommerce.Loyalty.Data.Services
             userBalanceEntity.Balance = balance;
             pointOperation.BalanceAfterOperation = balance;
 
-            await base.SaveChangesAsync(new List<PointsOperation> { pointOperation });
 
             if (isNew)
             {
@@ -92,6 +80,11 @@ namespace VirtoCommerce.Loyalty.Data.Services
             }
 
             await repository.UnitOfWork.CommitAsync();
+
+            userBalanceEntity = await repository.GetUserBalance(pointOperation.UserId, pointOperation.StoreId, false);
+            string userBalanceEntityId = userBalanceEntity.Id;
+            pointOperation.UserBalanceId = userBalanceEntityId;
+            await base.SaveChangesAsync(new List<PointsOperation> { pointOperation });
 
             return balance;
         }

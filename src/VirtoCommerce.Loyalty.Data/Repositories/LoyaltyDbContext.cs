@@ -25,6 +25,8 @@ namespace VirtoCommerce.Loyalty.Data.Repositories
 
             modelBuilder.Entity<PointsOperationEntity>().ToTable("LoyaltyOperations").HasKey(x => x.Id);
             modelBuilder.Entity<PointsOperationEntity>().Property(x => x.Id).HasMaxLength(128).ValueGeneratedOnAdd();
+            modelBuilder.Entity<PointsOperationEntity>().HasOne(x => x.UserBalance).WithMany(x => x.Operations)
+                .HasForeignKey(x => x.UserBalanceId).OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<LoyaltedOrderEntity>().HasDiscriminator<string>("Discriminator");
             modelBuilder.Entity<LoyaltedOrderEntity>().Property("Discriminator").HasMaxLength(128);

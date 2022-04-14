@@ -8,11 +8,6 @@ namespace VirtoCommerce.Loyalty.Core.Models
         public string UserId { get; set; }
         public string StoreId { get; set; }
         public decimal Balance { get; set; }
-        public IList<PointsOperation> Operations { get; set; }
-
-        public UserBalance()
-        {
-            Operations = new List<PointsOperation>();
-        }
+        public ICollection<PointsOperation> Operations { get; set; } = new List<PointsOperation>();
     }
 }

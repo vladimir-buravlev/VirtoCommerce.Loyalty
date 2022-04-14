@@ -17,14 +17,16 @@ namespace VirtoCommerce.Loyalty.Data.Repositories
         {
         }
 
-        public virtual async Task<UserBalanceEntity> GetUserBalance(string userId, string storeId)
+        public virtual async Task<UserBalanceEntity> GetUserBalance(string userId, string storeId, bool showOperations)
         {
-            return await UserBalances.FirstOrDefaultAsync(x => x.UserId == userId && x.StoreId == storeId);
-        }
+            var result = await UserBalances.FirstOrDefaultAsync(x => x.UserId == userId && x.StoreId == storeId);
 
-        public virtual async Task<PointsOperationEntity[]> GetUserOperations(string userId, string storeId)
-        {
-            return await PointsOperations.Where(x => x.UserId == userId && x.StoreId == storeId).OrderByDescending(x => x.CreatedDate).ToArrayAsync();
+            if (result != null && showOperations)
+            {
+                await PointsOperations.Where(x => x.UserId == userId && x.StoreId == storeId).OrderByDescending(x => x.CreatedDate).Skip(0).Take(20).LoadAsync();
+            }
+
+            return result;
         }
     }
 }
