@@ -39,7 +39,10 @@ namespace VirtoCommerce.Loyalty.Xapi.Schemas
                 context.CopyArgumentsToUserContext();
 
                 var loyaltyResponce = await _mediator.Send(request);
-                context.SetExpandedObjectGraph(loyaltyResponce);
+                if (loyaltyResponce != null)
+                {
+                    context.SetExpandedObjectGraph(loyaltyResponce);
+                }
 
                 return loyaltyResponce;
             });
