@@ -10,6 +10,7 @@ namespace VirtoCommerce.Loyalty.Xapi.Schemas
             Name = "PointsOperation";
             Description = "Represents points opertation";
 
+            Field(x => x.Id, nullable: false).Description("The ID of the points operation record.");
             Field(x => x.UserId, nullable: false).Description("The unique ID of the user.");
             Field(x => x.StoreId, nullable: true).Description("The unique ID of the store (may be nullable).");
             Field(x => x.Reason, nullable: true).Description("The reason of points operation");
